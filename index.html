@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professora MÃ¡rcia - Absolutismo</title>
+<style>
+:root { --primary:#24543f; --accent:#2f6288; --paper:#fffefa; --soft:#dbe7dc; --ink:#1f2a25; --ok:#137548; --bad:#a33b2d; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:Arial, Helvetica, sans-serif; background:linear-gradient(135deg,#e8f0e9,#fffaf0,#dce8ef); color:var(--ink); }
+.container { width:min(1060px,94vw); margin:24px auto; }
+.header,.panel { background:var(--paper); border:2px solid var(--soft); border-radius:20px; padding:22px; box-shadow:0 10px 25px rgba(35,74,55,.12); }
+.panel { margin-top:18px; }
+.badge { display:inline-block; background:var(--primary); color:white; padding:8px 14px; border-radius:999px; font-weight:700; font-size:13px; }
+h1 { margin:12px 0 6px; color:var(--primary); font-size:clamp(25px,4vw,40px); line-height:1.05; }
+.subtitle { margin:0; color:#506257; }
+.info-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px; }
+.info { background:#f1f7ef; border:1px solid #d8e8d7; border-radius:12px; padding:10px; }
+.info b { display:block; color:var(--primary); text-transform:uppercase; font-size:11px; }
+.student-box { display:grid; grid-template-columns:1.3fr .75fr .75fr; gap:12px; }
+label { display:block; font-weight:700; color:var(--primary); margin-bottom:6px; }
+input[type=text] { width:100%; padding:12px; border:2px solid #cbdacb; border-radius:12px; font-size:16px; }
+.actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:15px; }
+button { border:0; border-radius:12px; padding:12px 16px; font-weight:800; cursor:pointer; font-size:15px; }
+.primary { background:var(--primary); color:white; } .secondary { background:var(--accent); color:white; } .light { background:#e2ecd9; color:var(--primary); }
+.hidden { display:none !important; }
+.question { border:1px solid #d8e8d7; border-radius:16px; background:#fbfff7; margin:14px 0; padding:16px; }
+.q-top { display:flex; justify-content:space-between; gap:10px; }
+.q-title { font-weight:800; font-size:17px; color:var(--primary); }
+.level { background:#7a8f35; color:white; border-radius:999px; padding:4px 8px; font-size:12px; height:max-content; white-space:nowrap; }
+.option { display:flex; gap:9px; align-items:flex-start; background:white; border:1px solid #d8e8d7; border-radius:12px; padding:10px; margin-top:8px; cursor:pointer; }
+.option input { margin-top:3px; transform:scale(1.1); }
+.score-card { background:#f3f8ef; border:2px solid #cbdacb; border-radius:16px; padding:14px; margin:10px 0 14px; }
+.score { font-size:30px; color:var(--primary); font-weight:900; }
+.report-table { width:100%; border-collapse:collapse; font-size:12px; line-height:1.2; }
+.report-table th { background:#e8f1e3; color:var(--primary); }
+.report-table th,.report-table td { border:1px solid #cbdacb; padding:6px; vertical-align:top; }
+.correct { color:var(--ok); font-weight:800; } .wrong { color:var(--bad); font-weight:800; }
+#printReport { display:none; }
+.footer-note { text-align:center; color:#5e6b62; font-size:13px; }
+@media(max-width:760px) { .info-grid,.student-box { grid-template-columns:1fr; } .container { width:96vw; margin:10px auto; } .header,.panel { padding:15px; } }
+@media print {
+  @page { size:A4 portrait; margin:8mm; }
+  html,body { margin:0 !important; padding:0 !important; background:white !important; }
+  body > *:not(#printReport) { display:none !important; }
+  #printReport { display:block !important; width:194mm; min-height:280mm; margin:0 auto; color:#111; font-family:Arial, Helvetica, sans-serif; }
+  .pr-top { display:flex; justify-content:space-between; gap:8px; border-bottom:2px solid #111; padding-bottom:5px; }
+  .pr-school { font-weight:900; font-size:15px; text-transform:uppercase; }
+  .pr-sub { font-size:9.5px; line-height:1.18; }
+  .pr-score { width:72px; border:2px solid #111; text-align:center; padding:2px; }
+  .pr-score span { display:block; font-size:8px; font-weight:700; }
+  .pr-score strong { display:block; font-size:22px; line-height:1.05; }
+  .pr-title { text-align:center; font-size:12px; font-weight:900; margin:5px 0; padding:4px; border:1px solid #111; background:#eee; text-transform:uppercase; }
+  .pr-grid { display:grid; grid-template-columns:1.7fr .55fr .65fr .55fr; border:1px solid #111; border-bottom:0; }
+  .pr-grid div { font-size:8.8px; padding:3px 4px; border-right:1px solid #111; border-bottom:1px solid #111; min-height:18px; }
+  .pr-grid div:nth-child(4n) { border-right:0; }
+  .pr-info { border:1px solid #111; padding:4px; margin:4px 0; font-size:8.8px; line-height:1.1; }
+  .pr-table { width:100%; border-collapse:collapse; table-layout:fixed; font-size:8.8px; line-height:1.05; }
+  .pr-table th,.pr-table td { border:1px solid #111; padding:3px 2px; text-align:center; height:7.5mm; }
+  .pr-table th { background:#eee; font-weight:900; }
+  .pr-table td:nth-child(3), .pr-table th:nth-child(3) { text-align:left; padding-left:4px; }
+  .pr-ok { font-weight:900; color:#111; }
+  .pr-legend { margin-top:4px; font-size:8px; border:1px solid #111; padding:3px 4px; }
+  .pr-sign { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:14px; font-size:8px; text-align:center; }
+  .pr-sign div { border-top:1px solid #111; padding-top:3px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <section class="header">
+    <span class="badge">2Âº Trimestre â€¢ HistÃ³ria â€¢ Valor: 1,5 pontos</span>
+    <h1>AvaliaÃ§Ã£o de HistÃ³ria<br>Absolutismo e Sociedade Francesa</h1>
+    <p class="subtitle">Absolutismo, teÃ³ricos do absolutismo e sociedade francesa no Antigo Regime.</p>
+    <div class="info-grid">
+      <div class="info"><b>ColÃ©gio</b><span>ColÃ©gio Estadual Herbert de Souza</span></div>
+      <div class="info"><b>Localidade</b><span>SÃ£o JosÃ© dos Pinhais - ParanÃ¡</span></div>
+      <div class="info"><b>Professora</b><span>MÃ¡rcia Regina da Rocha</span></div>
+      <div class="info"><b>Turma</b><span>2Âº ano - ADM Integrado</span></div>
+    </div>
+  </section>
+
+  <section class="panel" id="startPanel">
+    <h2>IdentificaÃ§Ã£o do estudante</h2>
+    <div class="student-box">
+      <div><label for="studentName">Nome completo</label><input type="text" id="studentName" placeholder="Digite seu nome"></div>
+      <div><label for="studentClass">Turma</label><input type="text" id="studentClass" placeholder="Ex.: 2Âº ADM"></div>
+      <div><label for="studentDate">Data</label><input type="text" id="studentDate" placeholder="__/__/____"></div>
+    </div>
+    <div class="actions">
+      <button class="primary" onclick="startQuiz()">Iniciar avaliaÃ§Ã£o</button>
+      <button class="light" onclick="newQuizPreview()">Gerar novo sorteio</button>
+    </div>
+    <p><b>InstruÃ§Ã£o:</b> a avaliaÃ§Ã£o sorteia 15 questÃµes: 5 fÃ¡ceis, 7 mÃ©dias e 3 difÃ­ceis. Cada questÃ£o vale 0,1 ponto.</p>
+  </section>
+
+  <section class="panel hidden" id="quizPanel">
+    <h2>QuestÃµes da avaliaÃ§Ã£o</h2><p id="quizInfo"></p><form id="quizForm"></form>
+    <div class="actions"><button type="button" class="primary" onclick="finishQuiz()">Concluir avaliaÃ§Ã£o</button><button type="button" class="light" onclick="resetCurrentAnswers()">Limpar respostas</button></div>
+  </section>
+
+  <section class="panel hidden" id="resultPanel">
+    <h2>RelatÃ³rio da avaliaÃ§Ã£o</h2><div id="resultContent"></div>
+    <div class="actions"><button class="secondary" onclick="window.print()">Imprimir / salvar PDF em 1 pÃ¡gina</button><button class="light" onclick="location.reload()">Nova avaliaÃ§Ã£o</button></div>
+  </section>
+  <p class="footer-note">Arquivo HTML gerador de avaliaÃ§Ãµes â€¢ Banco interno com 60 questÃµes</p>
+</div>
+
+<section id="printReport"></section>
+
+<script>
+const BANK = {"facil": [{"q": "O Absolutismo foi uma forma de governo em que o poder polÃ­tico ficava concentrado principalmente nas mÃ£os de quem?", "options": ["Do rei", "Dos camponeses", "Dos operÃ¡rios industriais", "Dos estudantes universitÃ¡rios"], "a": 0}, {"q": "No Antigo Regime, o rei absolutista governava com grande autoridade sobre o Estado, as leis e os impostos. Essa caracterÃ­stica indica:", "options": ["centralizaÃ§Ã£o do poder", "democracia direta", "voto universal", "separaÃ§Ã£o total entre rei e Estado"], "a": 0}, {"q": "Qual monarca francÃªs ficou conhecido pela frase atribuÃ­da â€œO Estado sou euâ€?", "options": ["LuÃ­s XIV", "NapoleÃ£o III", "Henrique VIII", "Carlos Magno"], "a": 0}, {"q": "O PalÃ¡cio de Versalhes ficou associado ao governo de qual rei absolutista francÃªs?", "options": ["LuÃ­s XIV", "LuÃ­s XVI apenas depois da RevoluÃ§Ã£o", "Pedro I do Brasil", "Oliver Cromwell"], "a": 0}, {"q": "No Absolutismo, a nobreza geralmente mantinha:", "options": ["privilÃ©gios sociais e polÃ­ticos", "igualdade tributÃ¡ria com os camponeses", "controle das fÃ¡bricas modernas", "direito exclusivo ao voto universal"], "a": 0}, {"q": "A sociedade francesa do Antigo Regime era dividida em:", "options": ["trÃªs estados ou ordens sociais", "partidos polÃ­ticos modernos", "sindicatos industriais", "repÃºblicas independentes"], "a": 0}, {"q": "O Primeiro Estado na sociedade francesa era formado principalmente pelo:", "options": ["clero", "campesinato", "comÃ©rcio urbano", "exÃ©rcito estrangeiro"], "a": 0}, {"q": "O Segundo Estado na sociedade francesa era formado principalmente pela:", "options": ["nobreza", "burguesia industrial", "populaÃ§Ã£o escravizada africana", "classe operÃ¡ria"], "a": 0}, {"q": "O Terceiro Estado reunia principalmente:", "options": ["burgueses, camponeses, trabalhadores urbanos e demais grupos sem privilÃ©gios", "apenas reis e rainhas", "somente bispos e padres", "exclusivamente nobres da corte"], "a": 0}, {"q": "Na FranÃ§a do Antigo Regime, qual grupo social pagava a maior parte dos impostos?", "options": ["Terceiro Estado", "Segundo Estado", "Primeiro Estado", "A famÃ­lia real apenas"], "a": 0}, {"q": "Jacques-BÃ©nigne Bossuet defendia a ideia de que o poder do rei vinha:", "options": ["de Deus", "do voto popular universal", "dos sindicatos", "das assembleias operÃ¡rias"], "a": 0}, {"q": "Jean Bodin defendia o conceito de soberania como poder:", "options": ["supremo do Estado", "dividido igualmente entre todos os cidadÃ£os", "exercido apenas pela Igreja", "sem relaÃ§Ã£o com a polÃ­tica"], "a": 0}, {"q": "Thomas Hobbes escreveu uma obra famosa chamada:", "options": ["LeviatÃ£", "O Capital", "Contrato Social de 1789", "Manifesto Comunista"], "a": 0}, {"q": "Para Hobbes, sem um poder forte, a sociedade poderia viver em:", "options": ["conflito e inseguranÃ§a", "paz perfeita e igualdade total", "abundÃ¢ncia econÃ´mica para todos", "democracia moderna imediata"], "a": 0}, {"q": "Nicolau Maquiavel escreveu a obra:", "options": ["O PrÃ­ncipe", "LeviatÃ£", "A Riqueza das NaÃ§Ãµes", "EnciclopÃ©dia"], "a": 0}, {"q": "Uma caracterÃ­stica do mercantilismo associado aos Estados absolutistas era:", "options": ["intervenÃ§Ã£o do Estado na economia", "ausÃªncia total de impostos", "fim das monarquias europeias", "igualdade social obrigatÃ³ria"], "a": 0}, {"q": "No mercantilismo, a acumulaÃ§Ã£o de metais preciosos era chamada de:", "options": ["metalismo", "socialismo", "iluminismo", "feudalismo"], "a": 0}, {"q": "A burguesia, no Antigo Regime francÃªs, fazia parte do:", "options": ["Terceiro Estado", "Primeiro Estado", "Segundo Estado", "alto clero"], "a": 0}, {"q": "O clero e a nobreza eram chamados de grupos privilegiados porque:", "options": ["tinham vantagens sociais e fiscais", "pagavam todos os impostos sozinhos", "eram proibidos de participar da polÃ­tica", "nÃ£o possuÃ­am terras"], "a": 0}, {"q": "O Absolutismo se fortaleceu na Europa principalmente entre os sÃ©culos:", "options": ["XVI e XVIII", "V e VII", "XX e XXI", "I e II"], "a": 0}], "media": [{"q": "Por que o Absolutismo representou uma centralizaÃ§Ã£o polÃ­tica em relaÃ§Ã£o ao perÃ­odo feudal?", "options": ["Porque reduziu a autonomia dos senhores locais e fortaleceu o poder do rei", "Porque eliminou todos os impostos", "Porque transformou todos os paÃ­ses em repÃºblicas", "Porque acabou com a autoridade real"], "a": 0}, {"q": "A frase atribuÃ­da a LuÃ­s XIV, â€œO Estado sou euâ€, expressa a ideia de que:", "options": ["o rei simbolizava a concentraÃ§Ã£o do poder estatal", "o rei defendia o voto universal", "o Estado era controlado pelos camponeses", "a nobreza nÃ£o tinha relaÃ§Ã£o com a corte"], "a": 0}, {"q": "O PalÃ¡cio de Versalhes tambÃ©m servia como instrumento polÃ­tico porque:", "options": ["aproximava a nobreza da corte e reforÃ§ava o controle simbÃ³lico do rei", "era uma assembleia democrÃ¡tica do Terceiro Estado", "substituÃ­a todos os impostos cobrados na FranÃ§a", "impedia qualquer contato entre rei e nobreza"], "a": 0}, {"q": "A teoria do direito divino dos reis justificava o Absolutismo ao afirmar que:", "options": ["a autoridade real tinha origem sagrada e deveria ser obedecida", "o rei deveria ser eleito por todos os trabalhadores", "o poder vinha exclusivamente da burguesia", "a Igreja nÃ£o tinha influÃªncia social"], "a": 0}, {"q": "Para Jean Bodin, a soberania era importante porque:", "options": ["garantia ao Estado um poder superior Ã s forÃ§as particulares", "permitia que cada senhor feudal criasse suas prÃ³prias leis sem limites", "anulava qualquer necessidade de governo", "defendia a igualdade plena entre os trÃªs estados"], "a": 0}, {"q": "A defesa de um poder forte em Hobbes estava relacionada ao medo de:", "options": ["desordem, violÃªncia e guerra de todos contra todos", "excesso de liberdade comercial marÃ­tima", "crescimento das universidades medievais", "fim das monarquias por excesso de impostos baixos"], "a": 0}, {"q": "Em Hobbes, o contrato social significava que os indivÃ­duos aceitariam obedecer a um soberano para obter:", "options": ["seguranÃ§a e ordem", "privilÃ©gios nobiliÃ¡rquicos automÃ¡ticos", "isenÃ§Ã£o de impostos", "cargos hereditÃ¡rios na Igreja"], "a": 0}, {"q": "Maquiavel Ã© associado ao Absolutismo porque sua obra ajudou a pensar:", "options": ["a manutenÃ§Ã£o do poder polÃ­tico e a razÃ£o de Estado", "o fim de toda autoridade polÃ­tica", "a substituiÃ§Ã£o do Estado por comunidades sem governo", "a defesa do voto feminino no sÃ©culo XVI"], "a": 0}, {"q": "A expressÃ£o â€œrazÃ£o de Estadoâ€ pode ser relacionada Ã  ideia de que:", "options": ["as aÃ§Ãµes do governante visam preservar e fortalecer o Estado", "o rei nunca poderia agir politicamente", "a religiÃ£o deveria controlar todos os impostos sem participaÃ§Ã£o real", "a economia deveria ser totalmente isolada"], "a": 0}, {"q": "O mercantilismo fortalecia as monarquias absolutistas porque:", "options": ["aumentava a arrecadaÃ§Ã£o, o controle econÃ´mico e a riqueza do Estado", "eliminava o comÃ©rcio exterior", "defendia a ausÃªncia de tarifas e monopÃ³lios", "proibia o acÃºmulo de metais preciosos"], "a": 0}, {"q": "Na sociedade francesa do Antigo Regime, a desigualdade aparecia principalmente porque:", "options": ["clero e nobreza possuÃ­am privilÃ©gios enquanto o Terceiro Estado sustentava muitos impostos", "todos pagavam impostos iguais", "a burguesia controlava a monarquia absolutista sozinha", "os camponeses pertenciam ao Primeiro Estado"], "a": 0}, {"q": "O Terceiro Estado era socialmente diverso porque reunia:", "options": ["burguesia, camponeses, artesÃ£os e trabalhadores urbanos", "apenas altos nobres da corte", "somente bispos e cardeais", "exclusivamente reis e ministros"], "a": 0}, {"q": "A burguesia criticava certos aspectos do Antigo Regime porque:", "options": ["possuÃ­a riqueza econÃ´mica, mas nÃ£o tinha privilÃ©gios polÃ­ticos equivalentes aos da nobreza", "nÃ£o participava do comÃ©rcio", "era isenta de todos os impostos e controlava o rei", "fazia parte do alto clero"], "a": 0}, {"q": "Os camponeses franceses estavam entre os mais prejudicados porque:", "options": ["pagavam impostos, taxas e obrigaÃ§Ãµes que sustentavam os grupos privilegiados", "controlavam o PalÃ¡cio de Versalhes", "eram todos membros do alto clero", "nÃ£o tinham relaÃ§Ã£o com a produÃ§Ã£o agrÃ­cola"], "a": 0}, {"q": "A convocaÃ§Ã£o dos Estados Gerais em 1789 revelou uma crise do Antigo Regime porque:", "options": ["mostrou tensÃµes entre privilÃ©gios, impostos e representaÃ§Ã£o polÃ­tica", "confirmou a estabilidade absoluta do sistema", "impediu qualquer debate sobre impostos", "eliminou o Terceiro Estado da polÃ­tica"], "a": 0}, {"q": "A divisÃ£o da sociedade em ordens sociais era diferente de uma sociedade baseada em cidadania igualitÃ¡ria porque:", "options": ["os direitos e deveres variavam conforme o nascimento e o grupo social", "todos nasciam com direitos polÃ­ticos iguais", "a mobilidade social era plenamente garantida", "os impostos eram iguais para clero e camponeses"], "a": 0}, {"q": "A nobreza de corte dependia do rei absolutista porque:", "options": ["buscava favores, cargos, pensÃµes e prestÃ­gio junto Ã  monarquia", "organizava eleiÃ§Ãµes populares contra o rei", "controlava sindicatos de trabalhadores urbanos", "defendia o fim imediato da monarquia"], "a": 0}, {"q": "O Absolutismo francÃªs pode ser ligado Ã  formaÃ§Ã£o do Estado moderno porque:", "options": ["concentrou administraÃ§Ã£o, exÃ©rcito, impostos e leis sob autoridade central", "destruiu toda burocracia estatal", "impediu a criaÃ§Ã£o de exÃ©rcitos permanentes", "manteve o poder exclusivamente local e feudal"], "a": 0}, {"q": "A crÃ­tica ao Absolutismo cresceu no sÃ©culo XVIII porque:", "options": ["as ideias iluministas questionaram privilÃ©gios, autoridade absoluta e desigualdades", "a nobreza deixou de existir completamente", "os reis passaram a defender voto universal irrestrito", "a FranÃ§a nÃ£o tinha conflitos sociais"], "a": 0}, {"q": "A sociedade francesa anterior Ã  RevoluÃ§Ã£o pode ser compreendida como uma sociedade:", "options": ["estamental, hierarquizada e desigual", "industrial, democrÃ¡tica e igualitÃ¡ria", "sem privilÃ©gios e sem impostos", "governada pelo voto direto universal"], "a": 0}], "dificil": [{"q": "A consolidaÃ§Ã£o do Absolutismo deve ser entendida historicamente como:", "options": ["parte do processo de formaÃ§Ã£o dos Estados modernos e de centralizaÃ§Ã£o do poder polÃ­tico", "resultado da destruiÃ§Ã£o imediata de todos os impostos", "movimento de defesa da democracia liberal contemporÃ¢nea", "fim da autoridade monÃ¡rquica na Europa"], "a": 0}, {"q": "A teoria do direito divino dos reis tinha funÃ§Ã£o polÃ­tica porque:", "options": ["legitimava a obediÃªncia ao monarca e dificultava a contestaÃ§Ã£o de sua autoridade", "defendia eleiÃ§Ãµes periÃ³dicas para todos os cargos", "separava totalmente religiÃ£o e polÃ­tica no Antigo Regime", "negava qualquer autoridade do rei"], "a": 0}, {"q": "Ao defender a soberania, Jean Bodin contribuiu para pensar um Estado em que:", "options": ["a autoridade central se colocava acima dos poderes fragmentados", "os senhores feudais eram mais fortes que o rei", "a Igreja substituÃ­a completamente o governo civil", "a sociedade eliminava todos os conflitos"], "a": 0}, {"q": "A obra de Hobbes pode ser relacionada ao Absolutismo porque:", "options": ["justifica um soberano forte como garantia de ordem diante do medo da desordem social", "defende a ausÃªncia total de governo", "propÃµe a divisÃ£o da FranÃ§a em pequenas cidades independentes", "nega a necessidade de leis"], "a": 0}, {"q": "A leitura polÃ­tica de Maquiavel contribuiu para a ideia de razÃ£o de Estado ao defender que:", "options": ["o governante deve considerar a eficÃ¡cia polÃ­tica para conservar o Estado", "a polÃ­tica deve ignorar completamente as relaÃ§Ãµes de poder", "o prÃ­ncipe deve abrir mÃ£o de qualquer estratÃ©gia", "o Estado moderno nÃ£o precisa de governo"], "a": 0}, {"q": "A relaÃ§Ã£o entre Absolutismo e mercantilismo mostra que o Estado moderno buscava:", "options": ["fortalecer o poder polÃ­tico por meio do controle econÃ´mico, impostos e comÃ©rcio", "eliminar sua participaÃ§Ã£o na economia", "entregar todo comÃ©rcio Ã  nobreza feudal local", "proibir a formaÃ§Ã£o de mercados nacionais"], "a": 0}, {"q": "Versalhes pode ser interpretado como sÃ­mbolo do Absolutismo porque:", "options": ["expressava luxo, centralizaÃ§Ã£o, disciplina da nobreza e propaganda do poder real", "representava igualdade entre todos os estados sociais", "era sede de sindicatos camponeses", "foi construÃ­do para abolir a monarquia"], "a": 0}, {"q": "A sociedade francesa do Antigo Regime era marcada por contradiÃ§Ã£o porque:", "options": ["os grupos menos privilegiados sustentavam grande parte da carga fiscal enquanto os privilegiados mantinham vantagens", "a nobreza pagava todos os impostos do reino", "os camponeses controlavam a corte", "o clero nÃ£o possuÃ­a qualquer influÃªncia social"], "a": 0}, {"q": "A crise do Antigo Regime francÃªs se agravou quando:", "options": ["a crise fiscal e as desigualdades sociais colocaram em debate os privilÃ©gios e a representaÃ§Ã£o polÃ­tica", "os impostos foram totalmente eliminados", "o rei abriu mÃ£o voluntariamente do trono antes de 1789", "o Terceiro Estado recebeu todos os privilÃ©gios da nobreza"], "a": 0}, {"q": "A existÃªncia de uma burguesia rica dentro do Terceiro Estado revela que:", "options": ["riqueza econÃ´mica nÃ£o significava igualdade polÃ­tica no Antigo Regime", "todos os ricos pertenciam ao Segundo Estado", "nÃ£o havia comÃ©rcio na FranÃ§a absolutista", "a divisÃ£o social era baseada apenas na profissÃ£o moderna"], "a": 0}, {"q": "A desigualdade estamental francesa pode ser relacionada Ã  RevoluÃ§Ã£o Francesa porque:", "options": ["a permanÃªncia de privilÃ©gios e impostos desiguais estimulou crÃ­ticas e conflitos polÃ­ticos", "o sistema era plenamente igualitÃ¡rio e estÃ¡vel", "o Terceiro Estado defendia sempre a manutenÃ§Ã£o dos privilÃ©gios", "a nobreza liderou sozinha a luta contra seus prÃ³prios privilÃ©gios"], "a": 0}, {"q": "A crÃ­tica iluminista ao Absolutismo atingia diretamente:", "options": ["a concentraÃ§Ã£o de poder, os privilÃ©gios de nascimento e a ausÃªncia de representaÃ§Ã£o polÃ­tica ampla", "a defesa da razÃ£o e da ciÃªncia", "o combate aos privilÃ©gios", "a valorizaÃ§Ã£o da cidadania"], "a": 0}, {"q": "A diferenÃ§a entre poder absoluto e poder ilimitado deve ser compreendida porque:", "options": ["mesmo reis absolutistas enfrentavam limites prÃ¡ticos, tradiÃ§Ãµes, resistÃªncias e interesses sociais", "o rei nÃ£o tinha nenhum poder real", "o absolutismo era uma democracia parlamentar", "a sociedade francesa nÃ£o possuÃ­a grupos de pressÃ£o"], "a": 0}, {"q": "O estudo dos teÃ³ricos do Absolutismo permite perceber que as ideias polÃ­ticas:", "options": ["tambÃ©m servem para justificar, organizar ou contestar formas de poder", "nÃ£o tÃªm relaÃ§Ã£o com governos concretos", "sÃ£o sempre neutras e sem efeitos sociais", "existem apenas depois da RevoluÃ§Ã£o Francesa"], "a": 0}, {"q": "A relaÃ§Ã£o entre clero, nobreza e monarquia no Antigo Regime francÃªs indica:", "options": ["uma estrutura de alianÃ§as e privilÃ©gios que sustentava a ordem social", "uma sociedade sem hierarquias", "o domÃ­nio polÃ­tico dos camponeses", "a inexistÃªncia de religiÃ£o na vida pÃºblica"], "a": 0}, {"q": "A convocaÃ§Ã£o dos Estados Gerais acabou abrindo espaÃ§o para conflito porque:", "options": ["o Terceiro Estado passou a questionar o sistema de votaÃ§Ã£o e a desigualdade de representaÃ§Ã£o", "o clero exigiu pagar mais impostos que todos", "a nobreza pediu o fim de todos os privilÃ©gios sem resistÃªncia", "o rei aboliu imediatamente o Antigo Regime"], "a": 0}, {"q": "O Absolutismo nÃ£o pode ser explicado apenas pela vontade pessoal dos reis, pois tambÃ©m dependeu de:", "options": ["guerras, impostos, burocracia, exÃ©rcito, alianÃ§as sociais e teorias legitimadoras", "ausÃªncia completa de administraÃ§Ã£o", "fim do comÃ©rcio e das cidades", "igualdade social entre as ordens"], "a": 0}, {"q": "A sociedade francesa do sÃ©culo XVIII mostra que a noÃ§Ã£o moderna de cidadania ainda era limitada porque:", "options": ["os direitos eram desiguais e vinculados Ã  ordem social de nascimento", "todos votavam e participavam igualmente", "os impostos eram distribuÃ­dos proporcionalmente para os privilegiados", "nÃ£o havia diferenÃ§as jurÃ­dicas entre grupos sociais"], "a": 0}, {"q": "A tensÃ£o entre Antigo Regime e novas ideias polÃ­ticas pode ser sintetizada como conflito entre:", "options": ["privilÃ©gio, tradiÃ§Ã£o e autoridade absoluta contra igualdade jurÃ­dica, representaÃ§Ã£o e crÃ­tica racional", "camponeses privilegiados e reis sem poder", "industrializaÃ§Ã£o avanÃ§ada e democracia plena", "Igreja sem influÃªncia e nobreza sem terras"], "a": 0}, {"q": "A principal conclusÃ£o sobre Absolutismo, teÃ³ricos e sociedade francesa Ã© que:", "options": ["o poder absolutista foi sustentado por ideias, sÃ­mbolos, economia e hierarquias sociais, mas tambÃ©m gerou tensÃµes que favoreceram crÃ­ticas e mudanÃ§as", "a monarquia absolutista nÃ£o tinha relaÃ§Ã£o com a sociedade", "os teÃ³ricos nÃ£o influenciaram a polÃ­tica", "a sociedade francesa era igualitÃ¡ria e sem conflitos"], "a": 0}]};
+
+let selectedQuestions = [];
+let resultRows = [];
+
+function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function randomizeOptions(item) {
+  const shuffled = shuffle(item.options.map((text,index)=>({text, correct:index===item.a})));
+  return {...item, options:shuffled.map(opt=>opt.text), a:shuffled.findIndex(opt=>opt.correct)};
+}
+function pick(level,count) { return shuffle(BANK[level]).slice(0,count).map(item=>randomizeOptions({...item, level})); }
+function levelLabel(level) { return level==='facil'?'FÃ¡cil':level==='media'?'MÃ©dia':'DifÃ­cil'; }
+function levelShort(level) { return level==='facil'?'F':level==='media'?'M':'D'; }
+function generateQuiz() { selectedQuestions = shuffle([...pick('facil',5), ...pick('media',7), ...pick('dificil',3)]); }
+function newQuizPreview() { generateQuiz(); alert('Novo sorteio gerado. Clique em â€œIniciar avaliaÃ§Ã£oâ€ para responder.'); }
+function startQuiz() {
+  const name=document.getElementById('studentName').value.trim();
+  if(!name) { alert('Digite o nome completo do estudante antes de iniciar.'); return; }
+  generateQuiz(); renderQuiz();
+  document.getElementById('startPanel').classList.add('hidden');
+  document.getElementById('quizPanel').classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function renderQuiz() {
+  const form=document.getElementById('quizForm'); form.innerHTML='';
+  document.getElementById('quizInfo').innerHTML='Cada questÃ£o vale <b>0,1 ponto</b>. Nota mÃ¡xima: <b>1,5 pontos</b>.';
+  const letters=['A','B','C','D'];
+  selectedQuestions.forEach((q,idx)=>{
+    const block=document.createElement('div'); block.className='question';
+    block.innerHTML=`<div class="q-top"><div class="q-title">QuestÃ£o ${idx+1}. ${escapeHtml(q.q)}</div><span class="level">${levelLabel(q.level)}</span></div>` +
+      q.options.map((opt,oi)=>`<label class="option"><input type="radio" name="q${idx}" value="${oi}"><span><b>${letters[oi]})</b> ${escapeHtml(opt)}</span></label>`).join('');
+    form.appendChild(block);
+  });
+}
+function resetCurrentAnswers() { document.querySelectorAll("input[type='radio']").forEach(r=>r.checked=false); }
+function finishQuiz() {
+  const unanswered=[];
+  selectedQuestions.forEach((q,idx)=>{ if(!document.querySelector(`input[name="q${idx}"]:checked`)) unanswered.push(idx+1); });
+  if(unanswered.length && !confirm('HÃ¡ questÃµes sem resposta: '+unanswered.join(', ')+'. Deseja concluir mesmo assim?')) return;
+  const letters=['A','B','C','D']; let correct=0;
+  resultRows=selectedQuestions.map((q,idx)=>{
+    const checked=document.querySelector(`input[name="q${idx}"]:checked`);
+    const studentIndex=checked?Number(checked.value):null;
+    const isCorrect=studentIndex===q.a; if(isCorrect) correct++;
+    return {q, idx, studentIndex, isCorrect};
+  });
+  const score=(correct*0.1).toFixed(1).replace('.',',');
+  const percent=Math.round((correct/selectedQuestions.length)*100);
+  const name=document.getElementById('studentName').value.trim();
+  const turma=document.getElementById('studentClass').value.trim() || '________';
+  const date=document.getElementById('studentDate').value.trim() || new Date().toLocaleDateString('pt-BR');
+  renderScreenReport({name,turma,date,correct,score,percent,letters});
+  renderPrintReport({name,turma,date,correct,score,percent,letters});
+  document.getElementById('quizPanel').classList.add('hidden');
+  document.getElementById('resultPanel').classList.remove('hidden');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function renderScreenReport(meta) {
+  const result=document.getElementById('resultContent');
+  result.innerHTML=`<div class="score-card"><p><b>ColÃ©gio:</b> ColÃ©gio Estadual Herbert de Souza<br><b>Professora:</b> MÃ¡rcia Regina da Rocha<br><b>Estudante:</b> ${escapeHtml(meta.name)} &nbsp; <b>Turma:</b> ${escapeHtml(meta.turma)} &nbsp; <b>Data:</b> ${escapeHtml(meta.date)}</p><div class="score">Nota: ${meta.score} / 1,5</div><p><b>Acertos:</b> ${meta.correct} de 15 questÃµes (${meta.percent}%).</p></div>` +
+  `<table class="report-table"><thead><tr><th>NÂº</th><th>NÃ­vel</th><th>Pergunta</th><th>Aluno</th><th>Correta</th><th>Resultado</th></tr></thead><tbody>` +
+  resultRows.map(row=>{
+    const q=row.q; const student=row.studentIndex===null?'Sem resposta':meta.letters[row.studentIndex]+') '+q.options[row.studentIndex]; const correct=meta.letters[q.a]+') '+q.options[q.a];
+    return `<tr><td>${row.idx+1}</td><td>${levelLabel(q.level)}</td><td>${escapeHtml(q.q)}</td><td class="${row.isCorrect?'correct':'wrong'}">${escapeHtml(student)}</td><td class="correct">${escapeHtml(correct)}</td><td class="${row.isCorrect?'correct':'wrong'}">${row.isCorrect?'Correta':'Incorreta'}</td></tr>`;
+  }).join('') + `</tbody></table>`;
+}
+function renderPrintReport(meta) {
+  const pr=document.getElementById('printReport');
+  pr.innerHTML=`<div class="pr-top"><div><div class="pr-school">ColÃ©gio Estadual Herbert de Souza</div><div class="pr-sub">SÃ£o JosÃ© dos Pinhais - ParanÃ¡<br>Professora: MÃ¡rcia Regina da Rocha<br>Disciplina: HistÃ³ria â€¢ 2Âº ano do Curso TÃ©cnico em AdministraÃ§Ã£o Integrado</div></div><div class="pr-score"><span>NOTA</span><strong>${meta.score}</strong><span>/ 1,5</span></div></div><div class="pr-title">Comprovante final da avaliaÃ§Ã£o</div><div class="pr-grid"><div><b>Estudante:</b> ${escapeHtml(meta.name)}</div><div><b>Turma:</b> ${escapeHtml(meta.turma)}</div><div><b>Data:</b> ${escapeHtml(meta.date)}</div><div><b>Acertos:</b> ${meta.correct}/15</div></div><div class="pr-info"><b>ConteÃºdo:</b> Absolutismo, teÃ³ricos do absolutismo e sociedade francesa no Antigo Regime. <b>Valor:</b> 1,5 ponto. <b>ComposiÃ§Ã£o:</b> 5 fÃ¡ceis, 7 mÃ©dias e 3 difÃ­ceis.</div>` +
+  `<table class="pr-table"><thead><tr><th style="width:8%">NÂº</th><th style="width:10%">NÃ­vel</th><th style="width:42%">Tema/assunto da questÃ£o</th><th style="width:12%">Aluno</th><th style="width:12%">Correta</th><th style="width:16%">SituaÃ§Ã£o</th></tr></thead><tbody>` +
+  resultRows.map(row=>{ const q=row.q; const student=row.studentIndex===null?'â€”':meta.letters[row.studentIndex]; const corr=meta.letters[q.a]; return `<tr><td>${row.idx+1}</td><td>${levelShort(q.level)}</td><td>${escapeHtml(topicOf(q.q))}</td><td class="pr-ok">${student}</td><td class="pr-ok">${corr}</td><td class="pr-ok">${row.isCorrect?'C':'E'}</td></tr>`; }).join('') +
+  `</tbody></table><div class="pr-legend"><b>Legenda:</b> F = fÃ¡cil; M = mÃ©dia; D = difÃ­cil; C = correta; E = incorreta; â€” = sem resposta. Este comprovante foi formatado para impressÃ£o em uma Ãºnica pÃ¡gina A4.</div><div class="pr-sign"><div>Assinatura do(a) estudante</div><div>Assinatura da professora</div></div>`;
+}
+function topicOf(text) {
+  const t=text.toLowerCase();
+  if(t.includes('hobbes')||t.includes('leviatÃ£')||t.includes('contrato social')||t.includes('guerra de todos')) return 'Thomas Hobbes e poder soberano';
+  if(t.includes('bossuet')||t.includes('direito divino')||t.includes('deus')) return 'Bossuet e direito divino dos reis';
+  if(t.includes('bodin')||t.includes('soberania')) return 'Jean Bodin e soberania';
+  if(t.includes('maquiavel')||t.includes('prÃ­ncipe')||t.includes('razÃ£o de estado')) return 'Maquiavel e razÃ£o de Estado';
+  if(t.includes('mercantil')||t.includes('metalismo')||t.includes('economia')||t.includes('metais')) return 'Mercantilismo e Estado absolutista';
+  if(t.includes('versalhes')||t.includes('luÃ­s xiv')||t.includes('estado sou eu')) return 'LuÃ­s XIV e sÃ­mbolo do absolutismo';
+  if(t.includes('terceiro estado')||t.includes('primeiro estado')||t.includes('segundo estado')||t.includes('clero')||t.includes('nobreza')||t.includes('camponeses')||t.includes('burguesia')) return 'Sociedade francesa e trÃªs estados';
+  if(t.includes('estados gerais')||t.includes('1789')||t.includes('revoluÃ§Ã£o')||t.includes('crise')) return 'Crise do Antigo Regime francÃªs';
+  return 'Absolutismo e Antigo Regime';
+}
+function escapeHtml(str) { return String(str).replace(/[&<>"']/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[s])); }
+
+</script>
+</body>
+</html>
